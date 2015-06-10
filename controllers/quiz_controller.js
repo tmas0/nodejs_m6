@@ -16,11 +16,22 @@ exports.load = function (req, res, next, quizId) {
 
 // Get /quizes
 exports.index = function(req, res) {
-    models.Quiz.findAll().then(
-        function(quizes) {
-            res.render('quizes/index', { quizes: quizes });
-        }
-    ).catch(function(error) { next(error); } );
+    // Debemos comprovar si el usuario esta buscando algo.
+    var busqueda = req.query.search;
+    if (busqueda) {
+        busqueda = '%' + busqueda + '%';
+        models.Quiz.findAll( {where:["pregunta like ?", busqueda.replace(/ /, '%') ] } ).then(
+            function(quizes) {
+                res.render('quizes/index', { quizes: quizes });
+            }
+        ).catch(function(error) { next(error); });
+    } else {
+        models.Quiz.findAll().then(
+            function(quizes) {
+                res.render('quizes/index', { quizes: quizes });
+            }
+        ).catch(function(error) { next(error); } );
+    }
 };
 
 // Get /quizes/:id
