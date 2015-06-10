@@ -16,7 +16,7 @@ exports.load = function (req, res, next, quizId) {
 
 // Get /quizes
 exports.index = function(req, res) {
-    // Debemos comprovar si el usuario esta buscando algo.
+    // Debemos comprobar si el usuario esta buscando algo.
     var busqueda = req.query.search;
     if (busqueda) {
         busqueda = '%' + busqueda + '%';
