@@ -3,7 +3,6 @@
 <label for="resp" class="rem">Respuesta:</label>
 <input type="text" id="resp" name="quiz[respuesta]" value="<%= quiz.respuesta %>"/>
 <label for="tema" class="rem">Elige la temática de la pregunta:</label>
-<%= quiz.tema %>
 <select name="quiz[tema]">
     <% for ( var i in generos ) {
         var selected = '';
